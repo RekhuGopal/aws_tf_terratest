@@ -48,12 +48,24 @@ resource "aws_s3_bucket_policy" "bucket_access_policy" {
   policy = "${data.aws_iam_policy_document.s3_bucket_policy.json}"
 }
 
+
+resource "aws_s3_bucket_ownership_controls" "exampleownership" {
+  bucket = aws_s3_bucket.test_bucket.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
 resource "aws_s3_bucket_acl" "exampleacl" {
+  depends_on = [aws_s3_bucket_ownership_controls.exampleownership]
+
   bucket = aws_s3_bucket.test_bucket.id
   acl    = "private"
 }
 
 resource "aws_s3_bucket_versioning" "versioning_example" {
+  depends_on = [aws_s3_bucket_ownership_controls.example]
+  
   bucket = aws_s3_bucket.test_bucket.id
   versioning_configuration {
     status = "Enabled"
