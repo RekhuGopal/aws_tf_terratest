@@ -1,12 +1,9 @@
 package test
 
 import (
-	"fmt"
-	"strings"
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/aws"
-	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
 )
@@ -17,10 +14,10 @@ func TestTerraformAwsS3Example(t *testing.T) {
 
 	// Give this S3 Bucket a unique ID for a name tag so we can distinguish it from any other Buckets provisioned
 	// in your AWS account
-	expectedName := fmt.Sprintf("terratest-aws-s3-example-%s", strings.ToLower(random.UniqueId()))
+	//expectedName := fmt.Sprintf("terratest-aws-s3-example-%s", strings.ToLower(random.UniqueId()))
 
 	// Give this S3 Bucket an environment to operate as a part of for the purposes of resource tagging
-	expectedEnvironment := "AutomatedTesting"
+	//expectedEnvironment := "AutomatedTesting"
 
 	// Pick a random AWS region to test in. This helps ensure your code works in all regions.
 	awsRegion := "us-west-2"
@@ -30,11 +27,7 @@ func TestTerraformAwsS3Example(t *testing.T) {
 		TerraformDir: "..",
 
 		// Variables to pass to our Terraform code using -var options
-		Vars: map[string]interface{}{
-			"tag_bucket_name":        expectedName,
-			"tag_bucket_environment": expectedEnvironment,
-			"with_policy":            "true",
-		},
+		VarFiles: []string{"terraform.auto.tfvars"},
 
 		// Environment variables to set when running Terraform
 		EnvVars: map[string]string{
