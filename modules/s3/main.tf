@@ -64,8 +64,6 @@ resource "aws_s3_bucket_acl" "exampleacl" {
 }
 
 resource "aws_s3_bucket_versioning" "versioning_example" {
-  depends_on = [aws_s3_bucket_ownership_controls.example]
-  
   bucket = aws_s3_bucket.test_bucket.id
   versioning_configuration {
     status = "Enabled"
