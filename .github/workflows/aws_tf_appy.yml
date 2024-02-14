@@ -44,6 +44,10 @@ jobs:
           terraform_version: ${{ inputs.tf_version }}
           cli_config_credentials_token: ${{ secrets.TFC_API_TOKEN }}
 
+      - uses: actions/setup-go@v1
+        with:
+          go-version: 1.19
+
       - name: Terraform Init
         id: init
         run: terraform init
@@ -64,6 +68,10 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve
 
+      - name: Download Go Modules
+        working-directory: test
+        run: go mod download
+        
       - name: Run Go Tests
         working-directory: test
         run: go test -v -tags=unit

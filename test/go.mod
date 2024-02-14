@@ -1,4 +1,4 @@
-module github.com/RekhuGopal/aws_tf_terratest/test
+module github.com/RekhuGopal/aws_tf_terratest
 
 go 1.19
 
