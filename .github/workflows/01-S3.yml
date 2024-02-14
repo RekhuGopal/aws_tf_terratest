@@ -1,0 +1,18 @@
+name: "01-S3"
+on:
+  workflow_dispatch:
+
+jobs:
+  Plan:
+    uses: RekhuGopal/aws_tf_terratest/.github/workflows/aws_tf_plan.yml@main
+    with:
+      gh_environment: dev
+    secrets:
+      cli_config_credentials_token: ${{ secrets.TFC_API_TOKEN }}
+
+  Apply:
+    uses: RekhuGopal/aws_tf_terratest/.github/workflows/aws_tf_appy.yml@main
+    with:
+      gh_environment: dev
+    secrets:
+      cli_config_credentials_token: ${{ secrets.TFC_API_TOKEN }}
