@@ -1,7 +1,7 @@
  ### Reusable workflow to download terraform artifact built by `az_tf_plan` and apply the artifact/plan ###
 name: "Deploy TF Apply With Terratest"
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       tf_version:
         description: 'Specifies version of Terraform to use. e.g: 1.1.0 Default=latest.'
@@ -12,15 +12,12 @@ on:
         description: 'Specifies the GitHub deployment environment.'
         required: false
         type: string
-        default: null
-    secrets:
-      cli_config_credentials_token:
-        description: 'cli config credentials token'
-        required: true
+        default: dev
 env:
   AWS_REGION: "eu-west-2"
 
 permissions:
+  id-token: write
   contents: read    # This is required for actions/checkout
 
 jobs:
@@ -45,7 +42,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2.0.2
         with:
           terraform_version: ${{ inputs.tf_version }}
-          cli_config_credentials_token: ${{ secrets.cli_config_credentials_token }}
+          cli_config_credentials_token: ${{ secrets.TFC_API_TOKEN }}
 
       - name: Terraform Init
         id: init
