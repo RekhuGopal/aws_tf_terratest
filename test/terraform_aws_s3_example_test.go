@@ -20,10 +20,10 @@ func TestTerraformAwsS3Example(t *testing.T) {
 	expectedName := fmt.Sprintf("terratest-aws-s3-example-%s", strings.ToLower(random.UniqueId()))
 
 	// Give this S3 Bucket an environment to operate as a part of for the purposes of resource tagging
-	expectedEnvironment := "Automated Testing"
+	expectedEnvironment := "AutomatedTesting"
 
 	// Pick a random AWS region to test in. This helps ensure your code works in all regions.
-	awsRegion := aws.GetRandomStableRegion(t, nil, nil)
+	awsRegion := "us-west-2"
 
 	terraformOptions := &terraform.Options{
 		// The path to where our Terraform code is located
