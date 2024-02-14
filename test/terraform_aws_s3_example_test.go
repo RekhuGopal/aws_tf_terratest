@@ -27,7 +27,7 @@ func TestTerraformAwsS3Example(t *testing.T) {
 
 	terraformOptions := &terraform.Options{
 		// The path to where our Terraform code is located
-		TerraformDir: "",
+		TerraformDir: "..",
 
 		// Variables to pass to our Terraform code using -var options
 		Vars: map[string]interface{}{
