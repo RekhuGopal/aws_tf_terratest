@@ -12,14 +12,12 @@ terraform {
     }
   }
 
-backend "remote" {
-		hostname = "app.terraform.io"
-		organization = "CloudQuickLabs"
-
-		workspaces {
-			name = "AWSEKS"
-		}
-	}
+  backend "s3" {
+    bucket = "terratestbucketdemo"
+    region = "us-west-2"
+    dynamodb_table = "backendstroageterraform"
+    key = "terraform.tfstate"
+  }
 }
 
 provider "aws" {
