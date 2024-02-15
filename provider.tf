@@ -13,7 +13,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "terratestbucketdemo"
+    bucket = "terratestbucketcloudquicklabs"
     region = "us-west-2"
     dynamodb_table = "backendstroageterraform"
     key = "terraform.tfstate"
