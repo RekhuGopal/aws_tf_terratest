@@ -24,7 +24,7 @@ variable "with_policy" {
 
 variable "tag_bucket_name" {
   description = "The Name tag to set for the S3 Bucket."
-  default     = "Test Bucket"
+  default     = "module-eks-${lower(random_string.suffix.result)}"
 }
 
 variable "tag_bucket_environment" {

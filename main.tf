@@ -1,7 +1,7 @@
 ###### root/main.tf ######
 module "s3" {
   source                     = "./modules/s3"
-  with_policy                = true
-  tag_bucket_name            = "module-eks-${lower(random_string.suffix.result)}"
-  tag_bucket_environment     = "Dev"
+  with_policy                = var.with_policy
+  tag_bucket_name            = var.tag_bucket_environment
+  tag_bucket_environment     = var.tag_bucket_environment
 }
